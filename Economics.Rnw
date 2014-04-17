@@ -1,0 +1,48 @@
+\documentclass[12pt, a4paper, oneside]{article} % Paper size, default font size and one-sided paper
+%\graphicspath{{./Figures/}} % Specifies the directory where pictures are stored
+%\usepackage[dcucite]{harvard}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage[flushleft]{threeparttable}
+\usepackage{multirow}
+\usepackage[comma, sort&compress]{natbib}% Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
+\usepackage{graphicx}
+%\bibliographystyle{plainnat}
+\bibliographystyle{agsm}
+\usepackage[colorlinks = true, citecolor = blue, linkcolor = blue]{hyperref}
+%\hypersetup{urlcolor=blue, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
+%\renewcommand[\harvardurl]{URL: \url}
+\begin{document}
+\title{Economics Ideas}
+%\author{Rob Hayward\footnote{University of Brighton Business School, Lewes Road, Brighton, BN2 4AT; Telephone 01273 642586.  rh49@brighton.ac.uk}}
+\date{\today}
+\maketitle
+
+\section*{Piketty:Capital}
+Piketty:  \emph{Capital in the Twenty-First Century}.  The focus is rising inequality.  The rise in inequality is about the top 0.1\%.  The essential point of Piketty is that inherited wealth is making a comeback.  \href{http://www.ft.com/cms/s/2/0c6e9302-c3e2-11e3-a8e0-00144feabdc0.html#axzz2z7YbuMqh}{Martin Woolf} summarises Piketty's book as:
+\begin{itemize}
+\item No tendency towards economic equality
+\item Fall in inequality after 1945 was due to deliberate policy and the destruction of established establshed wealth between 1914 and 1945
+\item nonhuman capital appears to be indespensible today as ever - disabusing the idea that human capital will become more important.
+\item Wealth to income in Europe has risen above US levels in Europe (particularly France and UK)
+\item The rise of the \emph{supermanager} in the US and the return of \emph{patrimonial capitalism} in the US.
+\item Increase in US top earnings is explained by managers not sports or entertainment stars
+\item The case against increased managerial earnings being the result of marginal product is made by the lack of evidence in any underlying economic improvement since the 1960s.  
+\item It appears to be more about lower tax and changes in social norms.
+\end{itemize}
+
+At the heart is a view of capital accumulation. 
+\begin{itemize}
+\item The ratio of capital to income will rise without limit so long as the rate of return is higher than economic growth
+\item This is usually the case (outside of destruction or appropriation of wealth or the burst of economic growth in post-war Europe or today's emerging economies)
+\item Two reasons: 
+\begin{itemize}
+\item The rate of retun is only modestly related to the ratio of capital-to-income.  The \emph{elasticity of substitutio} between capital and labour is greater than one.  
+\item In normal times, capitalists save a sufficient proprtion of their income to ensure that captial grows faster than the economy.  The most wealthy enjoy the highest returns.
+\end{itemize}
+\end{itemize}
+
+
+\end{document}
