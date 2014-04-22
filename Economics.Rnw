@@ -44,5 +44,8 @@ At the heart is a view of capital accumulation.
 \end{itemize}
 \end{itemize}
 
+\href{http://www.foreignaffairs.com/articles/141218/tyler-cowen/capital-punishment}{Tyler Cowen} puts the emphasis on $r$.  What is the return on capital or wealth?  This can range from the treasury bill through to the equity.  In the former case there is a real loss, in the latter there can be real gains.  However, Piketty does not talk about risk.  There is also a question about whether returns to capital will continue to grow.  Regular theory argues that returns will diminish. Richardo argued that rent would not face diminishing returns and would come to dominate, but it did not. 
+
+Cowen  also argues that economic elites tend not to diversify.  He offers Bill Gates as an example, this, he argues, means that the accumulation of wealth is likely to be more risky than the simple model would imply. 
 
 \end{document}
