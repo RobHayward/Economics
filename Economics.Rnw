@@ -48,4 +48,6 @@ At the heart is a view of capital accumulation.
 
 Cowen  also argues that economic elites tend not to diversify.  He offers Bill Gates as an example, this, he argues, means that the accumulation of wealth is likely to be more risky than the simple model would imply. 
 
+An interesting issue that has been raised by \href{http://slackwire.blogspot.com/2014/04/substitutes-or-complements-marx-and.html}{Suresh Naidu} is the nature of capital.Suresh argues that capital can be a substitute or a compliment for labour. The continuous improvement of capitalism in Marx's view seems to take place in two phases:  the implementation of new machines that replace labour; the expansion of the new production facilities that require labour market compliments.   
+
 \end{document}
