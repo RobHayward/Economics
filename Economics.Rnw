@@ -16,7 +16,7 @@
 %\renewcommand[\harvardurl]{URL: \url}
 \begin{document}
 \title{Economics Ideas}
-%\author{Rob Hayward\footnote{University of Brighton Business School, Lewes Road, Brighton, BN2 4AT; Telephone 01273 642586.  rh49@brighton.ac.uk}}
+\author{Rob Hayward\footnote{University of Brighton Business School, Lewes Road, Brighton, BN2 4AT; Telephone 01273 642586.  rh49@brighton.ac.uk}}
 \date{\today}
 \maketitle
 
@@ -49,5 +49,143 @@ At the heart is a view of capital accumulation.
 Cowen  also argues that economic elites tend not to diversify.  He offers Bill Gates as an example, this, he argues, means that the accumulation of wealth is likely to be more risky than the simple model would imply. 
 
 An interesting issue that has been raised by \href{http://slackwire.blogspot.com/2014/04/substitutes-or-complements-marx-and.html}{Suresh Naidu} is the nature of capital.Suresh argues that capital can be a substitute or a compliment for labour. The continuous improvement of capitalism in Marx's view seems to take place in two phases:  the implementation of new machines that replace labour; the expansion of the new production facilities that require labour market compliments.   
+
+\href{http://economistsview.typepad.com/economistsview/2014/05/unpacking-the-first-fundamental-law.html}{Mark Thoma and James K. Galbraith}.  
+
+The \emph{fundamental law of capitalism} is $\alpha = r*\beta$.  Where $\alpha$ is the share of profit in income and $\beta$ is the capital/output ratio.  Therefore, the first fundamental law is
+\begin{equation}
+r = \alpha/\beta
+\end{equation}
+
+with $K$ for capital, $P$ for profit and $Y$ for income and output,
+
+\begin{equation}
+\alpha = \frac{P}{K}
+\end{equation} 
+
+and 
+
+\begin{equation}
+\beta = \frac{K}{Y}
+\end{equation}
+
+Therefore, 
+
+\begin{align*}
+r &= \frac{P/Y}{K/Y}\\
+&= \frac{P}{Y}
+\end{align*}
+
+How is $r$ measured?  This is contentious.  One way would be the discounted stream of future profits.  This means that the discount rate and expectations of future profits will have major effects on $r$.  if the key point is whether $r > g$ then it is importnant to know whether $r$ is stable not one.  Piketty makes the case for $r$ being stable and $g$ falling due to demographics.  However, a fall in $g$ may also reduce $r$.    
+\section{Markov Credit Model}
+This comes from the \emph{Financial Modeling} text.  
+
+Start with the rating agency table.  This is page 580. 
+
+The model is
+\begin{equation}
+\text{One year bond expected return} = \frac{\pi(1 + Q)F + (1 - \pi)\lambda F}{P}
+\end{equation}
+
+Where 
+\begin{itemize}
+\item F is the face value of the bond
+\item P is the price of the bond
+\item Q is the coupon on the bond
+\item $\pi$ is the probbility that the bond will not defult at the end of the year
+\item $\lambda$ the fraction of the bond that will be returned on fafault
+\end{itemize}
+
+<<Return>>=]
+Return <- function(F, P, Q, pi, lambda){
+  Y <- ((pi * (1+Q) * F + (1 - pi) * lambda * F)/(P))-1
+}
+F <- 100
+P <- 90
+pi <- 0.8
+lambda <- 0.4
+Q <- 0.08
+GRY <- Return(F, P, Q, pi, lambda)
+GRY
+@
+There is a matrix of default probbilities that depends on the credit rating. 
+<<Rating, tidy=TRUE>>=
+Pi <- list()
+Pi[[1]] <- matrix(c(0.97, 0.05, 0.01, 0.00, 0.00, 0.02, 0.80, 0.02, 0.00, 0.00, 
+               0.01, 0.15, 0.75, 0.00, 0.00, 0.00, 0.00, 0.22, 0.00, 0.00, 0.00, 
+               0.00, 0.00, 1, 1), nrow = 5)
+                 
+Pi[[1]]
+@
+These are the default probabilities for one year.  The probabilities for future years are a product of this Pi matrix. 
+
+<<Risk>>=
+Pi[[2]] <- Pi[[1]] %*% Pi[[1]]
+Pi[[2]]
+
+Risk <- function(Pi, n){
+  for(i in 1:(n - 1))
+  Pi[[1 + i]] <- Pi[[i]] %*% Pi[[1]]
+  return(Pi[[n]])
+}
+Risk(Pi, n = 3)
+@
+Now we need to create a \emph{bond payoff vector} and \emph{initial position}. 
+
+The bond payoff matrix is 
+
+
+$\text{Payoff} (t, t < N)$ 
+\begin{pmatrix}
+Q\\
+Q\\
+Q\\
+$\lambda $ \\
+0
+\end{pmatrix}
+$\text{Payoff} (t, t = N)$
+\begin{pmatrix}
+1 + Q\\
+1 + Q\\
+1 + Q\\
+$\lambda\\
+0
+\end{pmatrix}
+
+<<bondpayoff>>=
+bondpayoff <- function{Q, n, lambda, Rate} {
+Pi[[1]] <- matrix(c(0.97, 0.05, 0.01, 0.00, 0.00, 0.02, 0.80, 0.02, 0.00, 0.00, 
+               0.01, 0.15, 0.75, 0.00, 0.00, 0.00, 0.00, 0.22, 0.00, 0.00, 0.00, 
+               0.00, 0.00, 1, 1), nrow = 5)
+Risk <- function(Pi, n){
+  for(i in 1:(n - 1))
+  Pi[[1 + i]] <- Pi[[i]] %*% Pi[[1]]
+  return(Pi[[n]])
+}  
+POa <- c(Q, Q, Q, lambda, 0)
+POb <- c(1 + Q, 1 + Q, 1 + Q, lambda, 0)
+if(t < n){
+  PO <- POa
+} else {
+  PO <- POb
+}
+  R <- Risk(Pi, n)
+if(Rate == "A"){
+  In <- c(1, 0, 0, 0, 0)
+} else if(Rate == "B"){
+  In <- c(0, 1, 0, 0, 0)
+} else if(Rate == "C"){
+  In <- c(0, 0, 1, 0, 0)
+} else if(Rate == "D"){
+  In <- c(0, 0, 0, 1, 0)
+} else if(Rate == "E"){
+  In <- c(0, 0, 0, 0, 1)
+}
+Return <- In %*% R %*% PO
+}
+t <- 2
+bondpayoff(Q = 100, n = 2, lambda = 0.3, Rate = "A")
+bondpayoff
+@
 
 \end{document}
