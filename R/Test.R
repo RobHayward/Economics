@@ -14,11 +14,12 @@ Pi[[4]]
 Pi
 Pi[[2]] <- Pi[[1]] %*% Pi[[1]]
 Pi[2]
-# does not work
+# Now this works.  
 Risk <- function(Pi, n){
-  for(i in 1:(n-1))
+  for(i in 1:(n-1)){
   Pi[[1 + i]] <- Pi[[i]] %*% Pi[[1]]
-  return(Pi)[[n]]
+  }
+  Pi[[n]]
 }
-Risk(Pi, n = 3)
+Risk(Pi, n = 5)
 

@@ -20,6 +20,12 @@
 \date{\today}
 \maketitle
 
+\section*{Competition}
+Nothing to say but just wanted to add the link to this outline of the French candlestick makers petition against the sun.
+
+\href{http://bastiat.org/en/petition.html}{Petition against the sun}
+
+
 \section*{Piketty:Capital}
 Piketty:  \emph{Capital in the Twenty-First Century}.  The focus is rising inequality.  The rise in inequality is about the top 0.1\%.  The essential point of Piketty is that inherited wealth is making a comeback.  \href{http://www.ft.com/cms/s/2/0c6e9302-c3e2-11e3-a8e0-00144feabdc0.html#axzz2z7YbuMqh}{Martin Woolf} summarises Piketty's book as:
 \begin{itemize}
@@ -152,25 +158,29 @@ $\lambda\\
 0
 \end{pmatrix}
 
-<<bondpayoff>>=
-bondpayoff <- function{ 
-In 
-Return <- In %*% R %*% PO  
-  
+The expected cash flow
+<<Expected cash flow>>=
+# In is the initial state
+# Pi is the transission matrix
 Pi[[1]] <- matrix(c(0.97, 0.05, 0.01, 0.00, 0.00, 0.02, 0.80, 0.02, 0.00, 0.00, 
                0.01, 0.15, 0.75, 0.00, 0.00, 0.00, 0.00, 0.22, 0.00, 0.00, 0.00, 
                0.00, 0.00, 1, 1), nrow = 5)
-Risk <- function(Pi, n){
+EFlow <- function{Pi, Rate = "B", t, n, lambda = 0.4, Q, Y = 100){
+# Pipower will run the trasmission matrix forward n periods 
+Pipower <- function(Pi, n){
   for(i in 1:(n - 1))
   Pi[[1 + i]] <- Pi[[i]] %*% Pi[[1]]
   return(Pi[[n]])
 }  
+# Is the payout t = n or t < n
 POa <- c(Q, Q, Q, lambda, 0)
 POb <- c(1 + Q, 1 + Q, 1 + Q, lambda, 0)
 if(t < n){
   PO <- POa
-} else {
+} else if( t = n){
   PO <- POb
+} else {
+  PO <- 0
 }
   R <- Risk(Pi, n)
 if(Rate == "A"){
@@ -184,11 +194,10 @@ if(Rate == "A"){
 } else if(Rate == "E"){
   In <- c(0, 0, 0, 0, 1)
 }
-Return <- In %*% R %*% PO
+
+Eflow <- In %*% Pi[[n]] %*% PO
+Return(Eflow)
 }
-t <- 2
-bondpayoff(Q = 100, n = 2, lambda = 0.3, Rate = "A")
-bondpayoff
 @
 
 \end{document}
