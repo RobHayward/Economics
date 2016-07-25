@@ -20,6 +20,12 @@
 \date{\today}
 \maketitle
 
+\section{The apprentice economist}
+This comes from the book. 
+
+There are four (or more) sections to being an economist. 
+\subsection{Substitution}
+The equation of the ratio of marginal utilities with the ratio of prices is the substitution of goods to increase utility.  This is the \emph{Slutsky equation}.  
 \section*{Competition}
 Nothing to say but just wanted to add the link to this outline of the French candlestick makers petition against the sun.
 
@@ -82,7 +88,7 @@ r &= \frac{P/Y}{K/Y}\\
 &= \frac{P}{Y}
 \end{align*}
 
-How is $r$ measured?  This is contentious.  One way would be the discounted stream of future profits.  This means that the discount rate and expectations of future profits will have major effects on $r$.  if the key point is whether $r > g$ then it is importnant to know whether $r$ is stable not one.  Piketty makes the case for $r$ being stable and $g$ falling due to demographics.  However, a fall in $g$ may also reduce $r$.    
+How is $r$ measured?  This is contentious.  One way would be the discounted stream of future profits.  This means that the discount rate and expectations of future profits will have major effects on $r$.  If the key point is whether $r > g$ then it is importnant to know whether $r$ is stable not one.  Piketty makes the case for $r$ being stable and $g$ falling due to demographics.  However, a fall in $g$ may also reduce $r$.    
 \section{Markov Credit Model}
 This comes from the \emph{Financial Modeling} text.  
 
@@ -99,7 +105,7 @@ Where
 \item P is the price of the bond
 \item Q is the coupon on the bond
 \item $\pi$ is the probbility that the bond will not defult at the end of the year
-\item $\lambda$ the fraction of the bond that will be returned on fafault
+\item $\lambda$ the fraction of the bond that will be returned on default
 \end{itemize}
 
 <<Return>>=]
@@ -120,7 +126,6 @@ Pi <- list()
 Pi[[1]] <- matrix(c(0.97, 0.05, 0.01, 0.00, 0.00, 0.02, 0.80, 0.02, 0.00, 0.00, 
                0.01, 0.15, 0.75, 0.00, 0.00, 0.00, 0.00, 0.22, 0.00, 0.00, 0.00, 
                0.00, 0.00, 1, 1), nrow = 5)
-                 
 Pi[[1]]
 @
 These are the none-default probabilities for one year.  The probabilities for future years are a product of this Pi matrix. 
@@ -165,7 +170,7 @@ The expected cash flow
 Pi[[1]] <- matrix(c(0.97, 0.05, 0.01, 0.00, 0.00, 0.02, 0.80, 0.02, 0.00, 0.00, 
                0.01, 0.15, 0.75, 0.00, 0.00, 0.00, 0.00, 0.22, 0.00, 0.00, 0.00, 
                0.00, 0.00, 1, 1), nrow = 5)
-EFlow <- function{Pi, Rate = "B", t, n, lambda = 0.4, Q, Y = 100){
+EFlow <- function(Pi, Rate = "B", t, n, lambda = 0.4, Q, Y = 100){
 # Pipower will run the trasmission matrix forward n periods 
 Pipower <- function(Pi, n){
   for(i in 1:(n - 1))
@@ -177,7 +182,7 @@ POa <- c(Q, Q, Q, lambda, 0)
 POb <- c(1 + Q, 1 + Q, 1 + Q, lambda, 0)
 if(t < n){
   PO <- POa
-} else if( t = n){
+} else if(t == n){
   PO <- POb
 } else {
   PO <- 0
